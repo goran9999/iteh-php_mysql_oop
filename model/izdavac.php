@@ -6,25 +6,26 @@ class Izdavac{
    public $pib;
    public $adresa;
    public $username;
-   public $password;
+   public $sifra;
 
-   public function __construct($id=null,$naziv,$pib,$adresa,$username,$password){
+   public function __construct($id=null,$naziv=null,$pib=null,$adresa=null,$username=null,$sifra=null){
        $this->id=$id;
        $this->naziv=$naziv;
        $this->pib=$pib;
        $this->adresa=$adresa;
        $this->username=$username;
-       $this->password=$password;
+       $this->sifra=$sifra;
    }
 
    public static function ulogujIzdavaca($usr, mysqli $conn){
         $query = "SELECT * FROM izdavac WHERE username='$usr->username'
-        AND password='$usr->password'";
+        AND sifra='$usr->sifra'";
         return $conn->query($query);
    }
 
-   public static function registrujIzdavaca($usr,mysqli $conn){
-       $query= "INSERT INTO izdavac(naziv,pib,adresa,username,password) VALUES('$usr->$naziv','$usr->pib','$usr->adresa','$usr->username',$usr->password')";
+   public static function registrujIzdavaca(Izdavac $usr,mysqli $conn){
+       $query= "INSERT INTO izdavac(naziv, pib, adresa, username, sifra) VALUES('$usr->naziv','$usr->pib','$usr->adresa','$usr->username','$usr->sifra')";
+       echo $query;
        return $conn->query($query);
    }
 
