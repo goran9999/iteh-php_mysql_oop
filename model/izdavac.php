@@ -25,7 +25,7 @@ class Izdavac{
 
    public static function registrujIzdavaca(Izdavac $usr,mysqli $conn){
        $query= "INSERT INTO izdavac(naziv, pib, adresa, username, sifra) VALUES('$usr->naziv','$usr->pib','$usr->adresa','$usr->username','$usr->sifra')";
-       echo $query;
+       
        return $conn->query($query);
    }
 

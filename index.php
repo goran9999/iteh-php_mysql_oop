@@ -32,21 +32,25 @@ if(isset($_POST['username'])&&isset($_POST['password'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <title>Fakture</title>
 </head>
 <body>
     <div class="card">
 
-        <h1>Fakture</h1>
-
+        
         <div class="main-div">
+            <h1 class="card-title">Fakture</h1>
             <form action="#" method="POST">
                 <div class="container">
-                    <label for="username">Korisnicko ime</label>
-                    <input type="text" id="username" name="username">
+                    
+                    <input  type="text" id="username" name="username" placeholder="Username">       
                     <br>
-                    <label for="sifra">Sifra</label>
-                    <input type="password" id="sifra" name="password">
+                    
+                    <input type="password" id="sifra" name="password" placeholder="Password">
                     <br>
                     <button type="submit" name="submit">Prijavi se</button>
                     <br>

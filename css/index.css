@@ -1,0 +1,49 @@
+body{
+    background-image: url("background.jpg");
+    background-size: cover;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+.main-div{
+    width: 400px;
+     height: auto;
+     padding:2rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .7);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+    margin-left: 35%;
+    margin-top: 15rem;
+}
+a {
+    color: #4d4ae8;
+    text-decoration: none;
+  }
+  .card-title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  input{
+      margin-bottom: 1rem;
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, .7);
+      border:1px solid black;
+      font-size: 14px;
+      width: 200px;
+      margin-left: -1rem;
+      height: 24px;
+  }
+
+  button{
+      margin-bottom: 1rem;
+      font-size: 15px;
+      padding: .3rem;
+      cursor: pointer;
+      color: white;
+      background-color: red;
+      border:1px solid red;
+      border-radius: 3px;
+      width:9rem;
+      text-align: center;
+  }
