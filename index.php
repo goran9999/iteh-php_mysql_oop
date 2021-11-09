@@ -7,12 +7,14 @@ session_start();
 if(isset($_POST['username'])&&isset($_POST['password'])){
     $username=$_POST['username'];
     $password=$_POST['password'];
-    $izdavac=new Izdavac(1,null,null,null,$username,$password);
+    $izdavac=new Izdavac(134,null,null,null,$username,$password);
     $odg=Izdavac::ulogujIzdavaca($izdavac,$conn);
-
     if($odg->num_rows==1){
         echo `<script> console.log("Ulogovali ste se") </script>`;
-        $_SESSION['izdavac_id']=$izdavac->id;
+        echo $izdavac->id;
+        while($red=$odg->fetch_array()){
+        $_SESSION['izdavac_id']=$red['izdavacId'];
+        }
         header('Location: home.php');
         exit();
     }else{

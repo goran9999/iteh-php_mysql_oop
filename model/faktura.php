@@ -19,8 +19,16 @@ class Faktura{
         $this->fk_komitent=$fk_komitent;
     }
 
+    public static function sacuvajFakturu($faktura,mysqli $conn){
+        $query="INSERT INTO faktura(broj,datum,ukupan_iznos,fk_izdavac,fk_komitent)
+        VALUES ('$faktura->broj','$faktura->datum','$faktura->ukupan_iznos','$faktura->fk_izdavac','$faktura->fk_komitent')";
+
+        return $conn->query($query);
+    }
+
     public static function vratiFaktureIzdavaca($fk_izdavac,mysqli $conn){
-        $query="SELECT * FROM faktura WHERE fk_izdavac='$fk_izdavac'";
+        $query="SELECT F.fakturaId,F.broj,F.datum,F.ukupan_iznos,K.naziv 
+        from faktura F LEFT JOIN komitent K ON F.fk_komitent=K.komitentId WHERE F.fk_izdavac='$fk_izdavac'";
         return $conn->query($query);
     }
 
@@ -37,6 +45,12 @@ class Faktura{
     public function izmeniFakturu($id,mysqli $conn){
         $query="UPDATE faktura set broj='$this->broj',datum='$this->datum',ukupan_izos='$this->ukupan_iznos'
         fk_izdavac='$this->fk_izdavac',fk_komitent='$this->fk_komitent' WHERE id='$id' ";
+         return $conn->query($query);
+    }
+
+    public static function vratiNajveciId(mysqli $conn){
+        $query="SELECT MAX(fakturaId) from faktura";
+        return $conn->query($query);
     }
 
 }

@@ -8,22 +8,22 @@ class Komitent{
     public $adresa;
     public $fk_izdavac;
 
-    public function __construct($id=null,$naziv,$pib,$adresa,$fk_izdavac){
+    public function __construct($id=null,$naziv=null,$pib=null,$adresa=null,$fk_izdavac=null){
         $this->id=$id;
         $this->naziv=$naziv;
         $this->pib=$pib;
         $this->adresa=$adresa;
-        $this->izdavac=$fk_izdavac;
+        $this->fk_izdavac=$fk_izdavac;
     }
 
      public static function dodajKomitenta($komitent, mysqli $conn){
-         $query="INSERT INTO komitent(naziv,pib,adresa,izdavac) VALUES('$komitent->naziv','$komitent->pib',
+         $query="INSERT INTO komitent(naziv,pib,adresa,fk_izdavac) VALUES('$komitent->naziv','$komitent->pib',
          '$komitent->adresa','$komitent->fk_izdavac')";
          return $conn->query($query);
      }
      
      public function izbrisiPoId(mysqli $conn){
-         $query="DELETE FROM komitent WHERE id='$this->id'";
+         $query="DELETE FROM komitent WHERE komitentId='$this->id'";
          return $conn->query($query);
      }
 

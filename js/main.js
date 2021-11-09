@@ -31,3 +31,104 @@ $('#registrujForm').submit(function(){
         console.error('Sledeca greska se desila> '+textStatus, errorThrown)
     });
 });
+
+$('#btn-obrisi-kupca').click(function(){
+    console.log('Brisanje kupca.');
+
+    const idKupca= $(this).attr('name');
+    console.log(idKupca);
+    req = $.ajax({
+        url:'handler/delete-customer.php',
+        type:'post',
+        data:{'id':idKupca}
+    })
+    req.done(function(res,textStatuss,jqXHR){
+        if(res=="Success"){
+            console.log("Deleted");
+            alert("Kupac sa id-em"+idKupca+"je izbrisan");
+            location.reload();
+        }else{
+            console.log('Kupac nije izbrisan'+res);
+        }
+    })
+});
+
+$('#dodajKupca').submit(function(){
+    event.preventDefault();
+    console.log('Dodavanje kupca');
+    const $form=$(this);
+    const $input=$form.find('input','button');
+    const serijalizovanaForma=$form.serialize();
+    console.log(serijalizovanaForma);
+    $input.prop('disabled',true);
+
+    req=$.ajax({
+        url:'handler/save-customer.php',
+        type:'post',
+        data:serijalizovanaForma
+    });
+
+    req.done(function(res,textStatus,jqXHR){
+        if(res=="Success"){
+            alert('Kupac je dodat!');
+           console.log("Dodat kupac");
+            //location.reload(true);
+        }else{
+           alert("Kupac nije dodat!"+res);
+            console.log("Kupac nije dodat "+res);
+            console.log(res);
+            //location.reload();
+        }
+    });
+    req.fail(function(jqXHR, textStatus, errorThrown){
+        console.error('Sledeca greska se desila> '+textStatus, errorThrown)
+    });
+})
+
+$('#dodajFakturu').submit(function(){
+    event.preventDefault();
+    console.log('Dodavanje fakture');
+    const $form=$(this);
+    const $input=$form.find('table','input','button','select','tr','th');
+    const serijalizovanaForma=$form.serialize();
+
+    console.log(serijalizovanaForma);
+
+    $input.prop('disabled',true);
+
+    req=$.ajax({
+        url:'handler/add-invoice.php',
+        type:'post',
+        data:serijalizovanaForma
+    });
+    req.done(function(res,textStatus,jqXHR){
+        if(res.trim()=='Success'){
+            console.log('Dodata faktura');
+            alert('Faktura uspesno sacuvana');
+            location.reload();
+        }else{
+            alert('Problem u cuvanju fakture'+res);
+            //location.reload();
+        }
+    });
+    req.fail(function(jqXHR, textStatus, errorThrown){
+        console.error('Sledeca greska se desila> '+textStatus, errorThrown)
+    });
+})
+
+$('#btn-dodaj-kupca').click(function(){
+    console.log('Otvaranje modala');
+    $('#myModal').toggle();
+   
+})
+
+$('#btn-odustani').click(function(){
+    $('#myModal').toggle();
+    location.reload();
+})
+$('#dodajStavku').click(function(){
+    $('#stavkaModal').toggle();
+})
+$('#btn-sacuvaj-stavku').click(function(){
+    $('#stavkaModal').toggle();
+})
