@@ -93,7 +93,7 @@ if(!$komitenti){
 </div>
     
     <div>
-    <table class="table table-striped" style="width:100%;margin-left:auto;margin-right:auto;text-align:center;margin-top:2.5rem;">
+    <table class="table table-striped" id="mojaTabela" style="width:100%;margin-left:auto;margin-right:auto;text-align:center;margin-top:2.5rem;">
             <thead class="thead-dark">
                 <th>#</th>
                 <th>Naziv proizvoda</th>
@@ -197,11 +197,53 @@ if(!$komitenti){
         const th_broj=document.createElement('th');
         const th_empty=document.createElement('th');
 
+        const in_naziv=document.createElement('input');
+        const in_cena=document.createElement('input');
+        const in_kolicina=document.createElement('input');
+        const in_valuta=document.createElement('input');
+        
+        const style="text-align:center;border:none;font-weight:bold;background-color:inherit;"
+
+        in_naziv.style=style;
+        in_cena.style=style;
+        in_kolicina.style=style;
+        in_valuta.style=style;
+
+        in_naziv.disabled=true;
+        in_cena.disabled=true;
+        in_kolicina.disabled=true;
+        in_valuta.disabled=true;
+
+        in_naziv.name="naziv[]";
+        in_kolicina.name="kolicina[]";
+        in_cena.name="cena[]";
+        in_valuta.name="valuta[]";
+
+        in_naziv.id="naziv_"+number;
+        in_cena.id="cena_"+number;
+        in_kolicina.id="kolicina_"+number;
+        in_valuta.id="valuta_"+number;
+
+
+
+
+        in_naziv.size=naziv.length;
+        in_cena.size=cena.length;
+        in_kolicina.size=kolicina.length;
+        in_valuta.size=valuta.length;
+
+
         th_broj.innerHTML=number;
-        th_naziv.innerHTML=naziv;
-        th_cena.innerHTML=cena;
-        th_kolicina.innerHTML=kolicina;
-        th_valuta.innerHTML=valuta;
+        in_naziv.value=naziv;
+        in_cena.value=cena;
+        in_kolicina.value=kolicina;
+        in_valuta.value=valuta;
+
+        th_naziv.appendChild(in_naziv);
+        th_cena.appendChild(in_cena);
+        th_kolicina.appendChild(in_kolicina);
+        th_valuta.appendChild(in_valuta);
+
 
         const tr=document.createElement('tr');
         tr.appendChild(th_broj);
@@ -212,7 +254,7 @@ if(!$komitenti){
         tr.appendChild(th_empty);
 
         ukupan_zbir+=(+cena)*(+kolicina);
-        console.log(ukupno);
+        
 
         document.getElementById('ukupno').innerHTML=ukupan_zbir;
         document.getElementById('pdv').innerHTML="20";

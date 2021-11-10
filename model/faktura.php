@@ -22,7 +22,6 @@ class Faktura{
     public static function sacuvajFakturu($faktura,mysqli $conn){
         $query="INSERT INTO faktura(broj,datum,ukupan_iznos,fk_izdavac,fk_komitent)
         VALUES ('$faktura->broj','$faktura->datum','$faktura->ukupan_iznos','$faktura->fk_izdavac','$faktura->fk_komitent')";
-
         return $conn->query($query);
     }
 

@@ -91,15 +91,31 @@ $('#dodajFakturu').submit(function(){
     const $form=$(this);
     const $input=$form.find('table','input','button','select','tr','th');
     const serijalizovanaForma=$form.serialize();
-
     console.log(serijalizovanaForma);
-
     $input.prop('disabled',true);
-
+    let stavke=[];
+    let counter=1;
+    while(true){
+        let n=$('#naziv_'+counter+'').val();
+        let c=$('#cena_'+counter+'').val();
+        let k=$('#kolicina_'+counter+'').val();
+        let v=$('#valuta_'+counter+'').val();
+        if(n==undefined){
+            break;
+        }
+        let obj={
+            naziv:n,
+            cena:c,
+            kolicina:k,
+            valuta:v
+        }
+        counter++;
+        stavke.push(obj);
+    }
     req=$.ajax({
         url:'handler/add-invoice.php',
         type:'post',
-        data:serijalizovanaForma
+        data:{'forma':serijalizovanaForma,'stavke':stavke}
     });
     req.done(function(res,textStatus,jqXHR){
         if(res.trim()=='Success'){
@@ -114,6 +130,10 @@ $('#dodajFakturu').submit(function(){
     req.fail(function(jqXHR, textStatus, errorThrown){
         console.error('Sledeca greska se desila> '+textStatus, errorThrown)
     });
+    
+    
+    
+    
 })
 
 $('#btn-dodaj-kupca').click(function(){

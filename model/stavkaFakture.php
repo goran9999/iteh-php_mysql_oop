@@ -19,15 +19,20 @@ class StavkaFakture{
         $this->fk_faktura=$fk_faktura;
     }
 
-    public  function dodajStavku($id,mysqli $conn){
-        $query="INSERT INTO stavka fakture(naziv_proizvoda,kolicina,cena,valuta,fk_faktura
-        VALUES ('$this->naziv_proizvoda','$this->kolicina','$this->cena','$this->valuta','$id')";
+    public static function dodajStavku($stavka,mysqli $conn){
+        $query="INSERT INTO stavkafakture(naziv_proizvoda,kolicina,valuta,fk_faktura)
+        VALUES ('$stavka->naziv_proizvoda','$stavka->kolicina','$stavka->valuta','$stavka->fk_faktura')";
         return $conn->query($query);
     }
 
     public function izbrisiStavku(mysqli $conn){
-        $query="DELETE FROM stavka fakture WHERE id='$this->id'";
+        $query="DELETE FROM stavkafakture WHERE id='$this->id'";
         return $conn->query($query);
+    }
+
+    public function __toString(){
+        $str=$this->naziv_proizvoda . $this->kolicina . $this->valuta . $this->fk_faktura;
+        return $str;
     }
 
 
