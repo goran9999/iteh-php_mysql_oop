@@ -32,26 +32,26 @@ $('#registrujForm').submit(function(){
     });
 });
 
-$('#btn-obrisi-kupca').click(function(){
-    console.log('Brisanje kupca.');
+// $('#btn-obrisi-kupca').click(function(){
+//     console.log('Brisanje kupca.');
 
-    const idKupca= $(this).attr('name');
-    console.log(idKupca);
-    req = $.ajax({
-        url:'handler/delete-customer.php',
-        type:'post',
-        data:{'id':idKupca}
-    })
-    req.done(function(res,textStatuss,jqXHR){
-        if(res=="Success"){
-            console.log("Deleted");
-            alert("Kupac sa id-em"+idKupca+"je izbrisan");
-            location.reload();
-        }else{
-            console.log('Kupac nije izbrisan'+res);
-        }
-    })
-});
+//     const idKupca= $(this).attr('name');
+//     console.log(idKupca);
+//     req = $.ajax({
+//         url:'handler/delete-customer.php',
+//         type:'post',
+//         data:{'id':idKupca}
+//     })
+//     req.done(function(res,textStatuss,jqXHR){
+//         if(res=="Success"){
+//             console.log("Deleted");
+//             alert("Kupac sa id-em"+idKupca+"je izbrisan");
+//             location.reload();
+//         }else{
+//             console.log('Kupac nije izbrisan'+res);
+//         }
+//     })
+// });
 
 $('#dodajKupca').submit(function(){
     event.preventDefault();
@@ -130,10 +130,6 @@ $('#dodajFakturu').submit(function(){
     req.fail(function(jqXHR, textStatus, errorThrown){
         console.error('Sledeca greska se desila> '+textStatus, errorThrown)
     });
-    
-    
-    
-    
 })
 
 $('#btn-dodaj-kupca').click(function(){
@@ -152,3 +148,5 @@ $('#dodajStavku').click(function(){
 $('#btn-sacuvaj-stavku').click(function(){
     $('#stavkaModal').toggle();
 })
+
+

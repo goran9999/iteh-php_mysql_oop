@@ -74,7 +74,7 @@ if(!$komitenti){
           <td><?php echo $red['naziv']?></td>
           <td><?php echo $red['pib']?></td>
           <td><?php echo $red['adresa']?></td>
-          <td><button formmethod="post" class="btn btn-danger" id="btn-obrisi-kupca" name=<?php echo $red['komitentId']?> style="height:2rem;padding:0 10px;">Obrisi</button></td>
+          <td><button onclick="obrisiKupca(this.name)" formmethod="post" class="btn btn-danger" id="btn-obrisi-kupca" name=<?php echo $red['komitentId']?> style="height:2rem;padding:0 10px;">Obrisi</button></td>
         </tr>
         <?php
         endwhile;
@@ -124,5 +124,26 @@ if(!$komitenti){
 </div>
 </form>
 </body>
-<script src="js/main.js"></script>
+
+<script>
+
+    function obrisiKupca(e){
+      console.log("Brisanje kupca");
+      req = $.ajax({
+        url:'handler/delete-customer.php',
+        type:'post',
+        data:{'id':e}
+    })
+    req.done(function(res,textStatuss,jqXHR){
+        if(res=="Success"){
+            console.log("Deleted");
+            alert("Kupac sa id-em"+e+"je izbrisan");
+            location.reload();
+        }else{
+            console.log('Kupac nije izbrisan'+res);
+        }
+    })
+    }
+
+</script>
 </html>

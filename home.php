@@ -1,6 +1,7 @@
 <?php
 require 'dbBroker.php';
 require 'model/faktura.php';
+require 'model/komitent.php';
 
 session_start();
 if(!isset($_SESSION['izdavac_id'])){
@@ -12,11 +13,9 @@ if(!$fakture){
     echo 'Nastala je greska prilikom ucitavanja faktura.';
     die();
 }
-// if($fakture->num_rows==0){
-//     echo 'Nemate sacuvanih faktura.';
-//     die();
- //}
- else{
+else{
+   $komitenti=Komitent::vratiSveKomitente($_SESSION['izdavac_id'],$conn);
+   $faktura_id;
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +25,7 @@ if(!$fakture){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/home.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
 </head>
@@ -78,8 +78,8 @@ if(!$fakture){
                     <td><?php echo $red['naziv']?></td>
                     <td><?php echo $red['datum']?></td>
                     <td style="margin-left:50px;"><?php echo $red['ukupan_iznos']?></td>
-                    <td><button name=<?php echo $red['fakturaId']?> class="btn btn-primary">Izmeni</button></td>
-                    <td><button name=<?php echo $red['fakturaId']?> class="btn btn-danger">Obrisi</button></td>
+                    <td><button onclick="detaljnaFaktura(this.name)" id="btn-detalji-fak" name=<?php echo $red['fakturaId']?>  class="btn btn-primary">Detalji</button></td>
+                    <td><button onclick="obrisiFakturu(this.name)" name=<?php echo $red['fakturaId']?> class="btn btn-danger" id="btn-obrisi-fakturu">Obrisi</button></td>
                 </tr>
                 <?php
                 endwhile;
@@ -90,4 +90,32 @@ if(!$fakture){
         </table>
     </div>
 </body>
+
+<script>
+
+
+  function detaljnaFaktura(e){
+    
+    console.log(e);
+  }
+
+  function obrisiFakturu(e){
+    console.log("Brisanje fakture");
+    req=$.ajax({
+      url:'handler/delete-invoice.php',
+      type:'post',
+      data:{'id_izbrisi':e}
+    })
+    req.done(function(res,textStatus,jqXHR){
+      if(res=="Success"){
+        alert("Faktura uspesno izbrisana "+res);
+        location.reload();
+      }else{
+        alert("Problem u brisanju fakture "+res);
+        location.reload();
+      }
+    })
+  }
+
+</script>
 </html>

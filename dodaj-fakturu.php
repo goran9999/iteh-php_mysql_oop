@@ -244,6 +244,13 @@ if(!$komitenti){
         th_kolicina.appendChild(in_kolicina);
         th_valuta.appendChild(in_valuta);
 
+        const th_btn=document.createElement('button');
+        th_btn.setAttribute('name',number);
+        th_btn.setAttribute('class','btn btn-danger');
+        th_btn.innerHTML = 'X';
+        th_btn.style="font-size:13px;margin-top:5px;";
+        th_btn.type='button';
+        th_btn.setAttribute('onclick',izbrisiStavku());
 
         const tr=document.createElement('tr');
         tr.appendChild(th_broj);
@@ -251,10 +258,11 @@ if(!$komitenti){
         tr.appendChild(th_kolicina);
         tr.appendChild(th_cena);
         tr.appendChild(th_valuta);
-        tr.appendChild(th_empty);
+        tr.appendChild(th_btn);
 
         ukupan_zbir+=(+cena)*(+kolicina);
         
+        tr.name=number;
 
         document.getElementById('ukupno').innerHTML=ukupan_zbir;
         document.getElementById('pdv').innerHTML="20";
@@ -268,11 +276,9 @@ if(!$komitenti){
         document.getElementById('cena').value="";
         document.getElementById('kolicina').value="";
         document.getElementById('valuta').value="";
-
-
-
-
-
+    }
+    function izbrisiStavku(event){
+      
     }
 
 </script>

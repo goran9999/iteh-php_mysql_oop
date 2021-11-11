@@ -10,7 +10,7 @@ class Faktura{
     public $fk_komitent;
 
 
-    public function __construct($id=null,$broj,$datum,$ukupan_iznos,$fk_izdavac,$fk_komitent){
+    public function __construct($id=null,$broj=null,$datum=null,$ukupan_iznos=null,$fk_izdavac=null,$fk_komitent=null){
         $this->id=$id;
         $this->broj=$broj;
         $this->datum=$datum;
@@ -32,12 +32,12 @@ class Faktura{
     }
 
     public function izbrisiPoId(mysqli $conn){
-        $query="DELETE FROM faktura WHERE id='$this->id'";
+        $query="DELETE FROM faktura WHERE fakturaId='$this->id'";
         return $conn->query($query);
     }
 
-    public function vratiFakturuPoId(mysqli $conn){
-        $query="SELECT * FROM faktura WHERE id='$this->id'";
+    public static function vratiFakturuPoId($id,mysqli $conn){
+        $query="SELECT * FROM faktura WHERE fakturaId='$id'";
         return $conn->query($query);
     }
 
