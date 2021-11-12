@@ -28,7 +28,7 @@ $('#registrujForm').submit(function(){
         }
     });
     req.fail(function(jqXHR, textStatus, errorThrown){
-        console.error('Sledeca greska se desila> '+textStatus, errorThrown)
+        console.error('Sledeca greska se desila'+textStatus, errorThrown)
     });
 });
 
@@ -72,16 +72,16 @@ $('#dodajKupca').submit(function(){
         if(res=="Success"){
             alert('Kupac je dodat!');
            console.log("Dodat kupac");
-            //location.reload(true);
+            location.reload(true);
         }else{
            alert("Kupac nije dodat!"+res);
             console.log("Kupac nije dodat "+res);
             console.log(res);
-            //location.reload();
+            location.reload();
         }
     });
     req.fail(function(jqXHR, textStatus, errorThrown){
-        console.error('Sledeca greska se desila> '+textStatus, errorThrown)
+        console.error('Sledeca greska se desila'+textStatus, errorThrown)
     });
 })
 
@@ -95,13 +95,19 @@ $('#dodajFakturu').submit(function(){
     $input.prop('disabled',true);
     let stavke=[];
     let counter=1;
-    while(true){
+    let rowCount = $('table#mojaTabela tr:last').index() + 1;
+    let lastId=$('#mojaTabela tr:last').attr('id');
+    console.log("Broj redova je:"+rowCount);
+    console.log("Poslednji id je:"+lastId);
+    while(counter<=lastId){
         let n=$('#naziv_'+counter+'').val();
         let c=$('#cena_'+counter+'').val();
         let k=$('#kolicina_'+counter+'').val();
         let v=$('#valuta_'+counter+'').val();
+        console.log(n);
         if(n==undefined){
-            break;
+            counter++;
+            continue;
         }
         let obj={
             naziv:n,
@@ -128,7 +134,75 @@ $('#dodajFakturu').submit(function(){
         }
     });
     req.fail(function(jqXHR, textStatus, errorThrown){
-        console.error('Sledeca greska se desila> '+textStatus, errorThrown)
+        console.error('Sledeca greska se desila'+textStatus, errorThrown)
+    });
+})
+
+$('#detaljnaFaktura').submit(function(){
+    event.preventDefault();
+    const $form=$(this);
+    console.log("Azuriranje faktureeee");
+    const serijalizovanaForma=$form.serialize();
+    const $input=$form.find('input');
+    let nove_stavke=[];
+    let nazivi=$('th[name^="naziv_"]').text().split(" ");
+    let cene=$('th[name^="cena_"]').text().split(" ");
+    let kolicine=$('th[name^="kolicina_"]').text().split(" ");
+    let valute=$('th[name^="valuta_"]').text().split(" ");
+    console.log(cene);
+    for(i=0;i<nazivi.length-1;i++){
+        let obj={
+            naziv:nazivi[i],
+            cena:cene[i],
+            kolicina:kolicine[i],
+            valuta:valute[i]
+        }
+        nove_stavke.push(obj);
+    }
+    console.log(serijalizovanaForma);
+    $input.prop('disabled',true);
+    let counter=1;
+    let lastId=$('#stavke tr:last').attr('id');
+    while(counter<=lastId){
+        let n=$('#naziv_nova_'+counter+'').val();
+        let c=$('#cena_nova_'+counter+'').val();
+        let k=$('#kolicina_nova_'+counter+'').val();
+        let v=$('#valuta_nova_'+counter+'').val();
+       
+        if(n==undefined){
+            counter++;
+            continue;
+        }
+        let obj={
+            naziv:n,
+            cena:c,
+            kolicina:k,
+            valuta:v
+        }
+        counter++;
+        nove_stavke.push(obj);
+    }
+    console.log("Nove stavke:"+nove_stavke);
+    const fakturaId=$('#red').attr('name');
+    console.log(serijalizovanaForma);
+    console.log(fakturaId);
+
+    req=$.ajax({
+        url:'../handler/update-invoice.php',
+        type:'post',
+        data:{'id':fakturaId,'ukupno':serijalizovanaForma,'stavke':nove_stavke}
+    });
+    req.done(function(res,textStatus,jqXHR){
+        if(res.trim()=="Success"){
+            console.log("Azurirana faktura:"+res);
+            //window.location.replace('index.php');
+        }else{
+            console.log("Problem u azuriranju:"+res);
+            //window.location.replace('index.php');
+        }
+    });
+    req.fail(function(jqXHR, textStatus, errorThrown){
+        console.error('Sledeca greska se desila'+textStatus, errorThrown)
     });
 })
 
@@ -149,4 +223,13 @@ $('#btn-sacuvaj-stavku').click(function(){
     $('#stavkaModal').toggle();
 })
 
-
+$('#btn-otvori-modal').click(function(){
+    console.log('AAA');
+    $('#stavkaModalDetalji').toggle();
+})
+$('#btn-sacuvaj-detalji').click(function(){
+    $('#stavkaModalDetalji').toggle();
+})
+$('#btn-zatvori').click(function(){
+    $('#stavkaModalDetalji').toggle();
+})

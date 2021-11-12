@@ -25,6 +25,7 @@ if(!$komitenti){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dodaj fakturu</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body><nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:10rem;">
@@ -118,7 +119,7 @@ if(!$komitenti){
   </thead>
   <tbody>
     <tr>
-      <th id="ukupno"></th>
+      <th><input id="ukupna_cena" type="text" style="border:none;text-align:center;font-weight:bold;"></th>
       <th id="pdv"></th>
       <th  name="ukupan_iznos"><input type="text" name="ukupno" id="ukupnoSaPdv" style="border:none;text-align:center;font-weight:bold;"></th>
     </tr>
@@ -247,10 +248,10 @@ if(!$komitenti){
         const th_btn=document.createElement('button');
         th_btn.setAttribute('name',number);
         th_btn.setAttribute('class','btn btn-danger');
-        th_btn.innerHTML = 'X';
+        th_btn.innerHTML = '<i class="fas fa-trash-alt">';
         th_btn.style="font-size:13px;margin-top:5px;";
         th_btn.type='button';
-        th_btn.setAttribute('onclick',izbrisiStavku());
+        th_btn.setAttribute('onclick',"izbrisiStavku(this.name)");
 
         const tr=document.createElement('tr');
         tr.appendChild(th_broj);
@@ -262,9 +263,9 @@ if(!$komitenti){
 
         ukupan_zbir+=(+cena)*(+kolicina);
         
-        tr.name=number;
+        tr.id=number;
 
-        document.getElementById('ukupno').innerHTML=ukupan_zbir;
+        document.getElementById('ukupna_cena').value=ukupan_zbir;
         document.getElementById('pdv').innerHTML="20";
         document.getElementById('ukupnoSaPdv').value=ukupan_zbir+ukupan_zbir*(20/100);
 
@@ -277,8 +278,16 @@ if(!$komitenti){
         document.getElementById('kolicina').value="";
         document.getElementById('valuta').value="";
     }
-    function izbrisiStavku(event){
-      
+    function izbrisiStavku(number){
+      const table_row=document.getElementById(number);
+      const cena=document.getElementById("cena_"+number).value;
+      const ukupna_cena=document.getElementById('ukupna_cena');
+      console.log(ukupna_cena.value);
+       const ukupan_iznos=document.getElementById('ukupnoSaPdv');
+       const kolicina=document.getElementById("kolicina_"+number).value;
+       ukupna_cena.value=(+ukupna_cena.value)-(+cena*(+kolicina));
+      ukupan_iznos.value=+ukupna_cena.value+(+ukupna_cena.value)*0.2;
+      table_row.remove();
     }
 
 </script>

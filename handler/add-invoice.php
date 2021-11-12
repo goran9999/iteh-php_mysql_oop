@@ -28,8 +28,8 @@ if($forma['broj_fakture']&&$forma['komitent']&&$forma['datum_izdavanja']&&$forma
     $status=Faktura::sacuvajFakturu($faktura,$conn);
     $poslednji_id=$conn->insert_id;
     for($i=0;$i<count($_POST['stavke']);$i++){
-        $stavka=new StavkaFakture(null,$_POST['stavke'][$i]['naziv'],$_POST['stavke'][$i]['kolicina'],$_POST['stavke'][$i]['cena'],
-        $_POST['stavke'][$i]['valuta'],$poslednji_id);
+        $stavka=new StavkaFakture(null,$_POST['stavke'][$i]['naziv'],$_POST['stavke'][$i]['cena'],
+        $_POST['stavke'][$i]['kolicina'],$_POST['stavke'][$i]['valuta'],$poslednji_id);
         $odg=StavkaFakture::dodajStavku($stavka,$conn);
     }
         if($status){

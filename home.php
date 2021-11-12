@@ -96,7 +96,7 @@ else{
 
   function detaljnaFaktura(e){
     
-    console.log(e);
+    window.location.replace('detaljna-faktura.php/'+e);
   }
 
   function obrisiFakturu(e){

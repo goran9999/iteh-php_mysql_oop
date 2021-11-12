@@ -125,6 +125,8 @@ if(!$komitenti){
 </form>
 </body>
 
+<script src="js/main.js"></script>
+
 <script>
 
     function obrisiKupca(e){

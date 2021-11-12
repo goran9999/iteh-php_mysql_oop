@@ -37,7 +37,8 @@ class Faktura{
     }
 
     public static function vratiFakturuPoId($id,mysqli $conn){
-        $query="SELECT * FROM faktura WHERE fakturaId='$id'";
+        $query="SELECT F.broj,F.datum,F.ukupan_iznos,K.naziv FROM FAKTURA F LEFT JOIN komitent K
+        ON F.fk_komitent=K.komitentId WHERE fakturaId='$id'";
         return $conn->query($query);
     }
 
@@ -49,6 +50,10 @@ class Faktura{
 
     public static function vratiNajveciId(mysqli $conn){
         $query="SELECT MAX(fakturaId) from faktura";
+        return $conn->query($query);
+    }
+    public static function azurirajFakturu($id,$iznos,mysqli $conn){
+        $query="UPDATE faktura SET ukupan_iznos='$iznos' WHERE fakturaId='$id'";
         return $conn->query($query);
     }
 
