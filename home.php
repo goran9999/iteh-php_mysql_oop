@@ -4,6 +4,9 @@ require 'model/faktura.php';
 require 'model/komitent.php';
 
 session_start();
+
+
+
 if(!isset($_SESSION['izdavac_id'])){
     header('Location: index.php');
     exit();
@@ -29,7 +32,7 @@ else{
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body style=" font-family: 'Inter', sans-serif;">
+<body style=" font-family: 'Inter', sans-serif;background: linear-gradient(90deg, #edc0bf 0,#c4caef 58%);">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:10rem;">
   <div class="container-fluid"  style="float:rigt;">
     <div>
@@ -48,23 +51,23 @@ else{
           <a class="nav-link active" href="komitenti.php">Kupci</a>
         </li>
         <li>
-            <button style="border:none;margin-top:7px;background-color:inherit;">Odjava</button>
+            <button id="btn-odjava" style="cursor:pointer;border:none;margin-top:7px;background-color:inherit;">Odjava</button>
         </li>
       </ul>
     </div>
   </div>
 </nav>
     <div>
-        <table class="table table-striped" style="width:50%;margin-left:auto;margin-right:auto;text-align:center;">
-            <thead class="thead-dark">
+        <table id="myTable" class="table table-striped" style="width:50%;margin-left:auto;margin-right:auto;text-align:center;background-color:white;border-radius:5px;">
+            <thead class="thead-dark" style="border-radius:5px;">
                 <th>Broj fakture</th>
                 <th>Kupac</th>
                 <th>Datum</th>
                 <th>Ukupno</th>
-                <th><button class="btn btn-dark">Sortiraj</button></th>
+                <th><button class="btn btn-dark" onclick="sortirajPoDatumima();">Sortiraj</button></th>
                 <th></th>
             </thead>
-            <tbody>
+            <tbody style="border-radius:5px;">
                 <?php
                 if($fakture->num_rows==0){
                 ?>
@@ -90,6 +93,7 @@ else{
         </table>
     </div>
 </body>
+<script src="js/main.js"></script>
 
 <script>
 
@@ -98,6 +102,34 @@ else{
     
     window.location.replace('detaljna-faktura.php/'+e);
   }
+
+  function sortirajPoDatumima() {
+            console.log("Sortiranje tabele!");
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("myTable");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[2];
+                    console.log(x);
+                    y = rows[i + 1].getElementsByTagName("TD")[2];
+                    console.log(y);
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+
 
   function obrisiFakturu(e){
     console.log("Brisanje fakture");
@@ -116,6 +148,8 @@ else{
       }
     })
   }
+
+  
 
 </script>
 </html>

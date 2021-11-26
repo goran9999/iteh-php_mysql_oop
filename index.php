@@ -16,9 +16,11 @@ if(isset($_POST['username'])&&isset($_POST['password'])){
         $_SESSION['izdavac_id']=$red['izdavacId'];
         }
         header('Location: home.php');
+        
+        
         exit();
     }else{
-        echo `<script>alert("Neuspesna prijava")</script>`;
+        echo("<script>alert('Neuspesna prijava!')</script>");
     }
 
 }

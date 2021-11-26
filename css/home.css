@@ -1,6 +1,7 @@
 body{
     margin: 0%;
     font-family: 'Inter', sans-serif;
+    background: linear-gradient(90deg, #edc0bf 0,#c4caef 58%);
 }
 .logo{
     display: inline;

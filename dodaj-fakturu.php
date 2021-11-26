@@ -46,12 +46,13 @@ if(!$komitenti){
           <a class="nav-link active" href="komitenti.php">Kupci</a>
         </li>
         <li>
-            <button style="border:none;margin-top:7px;background-color:inherit;">Odjava</button>
+            <button id="odjaviSe"  style="border:none;margin-top:7px;background-color:inherit;">Odjava</button>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+    
     <form action="#" method="post" id="dodajFakturu" style="width:50%;margin-left:auto;margin-right:auto;">
 
     <div class="row">
@@ -94,7 +95,7 @@ if(!$komitenti){
 </div>
     
     <div>
-    <table class="table table-striped" id="mojaTabela" style="width:100%;margin-left:auto;margin-right:auto;text-align:center;margin-top:2.5rem;">
+    <table class="table table-striped" id="mojaTabela" style="background-color:white;width:100%;margin-left:auto;margin-right:auto;text-align:center;margin-top:2.5rem;">
             <thead class="thead-dark">
                 <th>#</th>
                 <th>Naziv proizvoda</th>
@@ -170,7 +171,7 @@ if(!$komitenti){
        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="btn-sacuvaj-stavku" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button id="btn-sacuvaj-stavku" type="button" class="btn btn-primary" onclick="dodajStavkuFakture()">Sacuvaj stavku</button>
       </div>
     </div>
@@ -179,7 +180,7 @@ if(!$komitenti){
     </div>
    
 </body>
-<script src="js/main.js"></script>
+<script src='js/main.js'></script>
 </html>
 
 <script>

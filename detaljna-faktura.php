@@ -37,13 +37,13 @@ if(!$faktura){
     <div>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="localhost:8081/iteh/iteh_domaci_1/home.php">Fakture</a>
+          <a class="nav-link active" aria-current="page" href="/iteh/iteh_domaci_1/home.php">Fakture</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="dodaj-fakturu.php">Dodaj fakturu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="komitenti.php">Kupci</a>
+          <a class="nav-link active" href="/iteh/iteh_domaci_1/komitenti.php">Kupci</a>
         </li>
         <li>
             <button style="border:none;margin-top:7px;background-color:inherit;">Odjava</button>

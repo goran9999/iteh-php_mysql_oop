@@ -28,7 +28,7 @@ if(!$komitenti){
     
     <title>Document</title>
 </head>
-<body style=" font-family: 'Inter', sans-serif;">
+<body style=" font-family: 'Inter', sans-serif;background: linear-gradient(90deg, #edc0bf 0,#c4caef 58%);">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:10rem;">
   <div class="container-fluid"  style="float:rigt;">
     <div>
@@ -41,10 +41,10 @@ if(!$komitenti){
           <a class="nav-link active" aria-current="page" href="home.php">Fakture</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Dodaj fakturu</a>
+          <a class="nav-link active" href="dodaj-fakturu.php">Dodaj fakturu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Kupci</a>
+          <a class="nav-link active" href="komitenti.php">Kupci</a>
         </li>
         <li>
             <button style="border:none;margin-top:7px;background-color:inherit;">Odjava</button>
@@ -54,7 +54,7 @@ if(!$komitenti){
   </div>
 </nav>
 <div>
-  <table class="table table-striped" style="width:50%;margin-left:auto;margin-right:auto;text-align:center;">
+  <table class="table table-striped" style="width:50%;margin-left:auto;margin-right:auto;text-align:center;background-color:white;">
   <thead class="thead-dark">
                 <th>#</th>
                 <th>Naziv</th>

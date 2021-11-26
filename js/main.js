@@ -127,7 +127,8 @@ $('#dodajFakturu').submit(function(){
         if(res.trim()=='Success'){
             console.log('Dodata faktura');
             alert('Faktura uspesno sacuvana');
-            location.reload();
+            //location.reload();
+            history.replaceState({},'',"home.php");
         }else{
             alert('Problem u cuvanju fakture'+res);
             //location.reload();
@@ -229,7 +230,29 @@ $('#btn-otvori-modal').click(function(){
 })
 $('#btn-sacuvaj-detalji').click(function(){
     $('#stavkaModalDetalji').toggle();
-})
+});
 $('#btn-zatvori').click(function(){
     $('#stavkaModalDetalji').toggle();
+});
+$('#btn-sacuvaj-fakturu').click(function(){
+    header('Location: home.php');
 })
+$('#btn-odjava').click(function(){
+    console.log("Odjavljivanje korisnika!");
+    alert('aaa');
+})
+
+// $('#odjaviSe').click(function(){
+//     console.log("Odjava korisnika");
+//     // req=$.ajax({
+//     //     url:'handler/logout.php',
+//     //     type:'get'
+//     // })
+//     // req.done(function(res,textStatus,jqXHR){
+//     //     if(res=="Success"){
+//     //         location.reload();
+//     //     }else{
+//     //         alert(res);
+//     //     }
+//     // })
+// });
