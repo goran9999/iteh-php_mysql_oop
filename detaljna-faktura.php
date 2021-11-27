@@ -46,7 +46,7 @@ if(!$faktura){
           <a class="nav-link active" href="/iteh/iteh_domaci_1/komitenti.php">Kupci</a>
         </li>
         <li>
-            <button style="border:none;margin-top:7px;background-color:inherit;">Odjava</button>
+            <button id="btn-odjavas" style="border:none;margin-top:7px;background-color:inherit;">Odjava</button>
         </li>
       </ul>
     </div>
@@ -183,6 +183,7 @@ if(!$faktura){
 </div>
 </body>
 <script src="../js/main.js" type="text/javascript"></script>
+
 <script>
      let number="1";
     let ukupan_zbir=0;

@@ -1,12 +1,17 @@
 <?php
+    session_start();
 
-if(isset($_SESSION['korisnik_id'])){
-    session_destroy();
-    header('Location: index.php');
-    echo "Success";
-}else{
-    echo "Failed";
-}
+ 
+
+    if(isset($_SESSION['izdavac_id'])){
+        session_destroy();
+        echo "Success";
+    }else{
+        echo 'Failed';
+    }
+
+   
+
 
 
 ?>

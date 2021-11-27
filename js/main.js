@@ -32,26 +32,7 @@ $('#registrujForm').submit(function(){
     });
 });
 
-// $('#btn-obrisi-kupca').click(function(){
-//     console.log('Brisanje kupca.');
 
-//     const idKupca= $(this).attr('name');
-//     console.log(idKupca);
-//     req = $.ajax({
-//         url:'handler/delete-customer.php',
-//         type:'post',
-//         data:{'id':idKupca}
-//     })
-//     req.done(function(res,textStatuss,jqXHR){
-//         if(res=="Success"){
-//             console.log("Deleted");
-//             alert("Kupac sa id-em"+idKupca+"je izbrisan");
-//             location.reload();
-//         }else{
-//             console.log('Kupac nije izbrisan'+res);
-//         }
-//     })
-// });
 
 $('#dodajKupca').submit(function(){
     event.preventDefault();
@@ -195,11 +176,11 @@ $('#detaljnaFaktura').submit(function(){
     });
     req.done(function(res,textStatus,jqXHR){
         if(res.trim()=="Success"){
-            console.log("Azurirana faktura:"+res);
-            //window.location.replace('index.php');
+            alert("Azurirana faktura");
+            window.location.replace('index.php');
         }else{
             console.log("Problem u azuriranju:"+res);
-            //window.location.replace('index.php');
+            window.location.replace('index.php');
         }
     });
     req.fail(function(jqXHR, textStatus, errorThrown){
@@ -212,6 +193,7 @@ $('#btn-dodaj-kupca').click(function(){
     $('#myModal').toggle();
    
 })
+
 
 $('#btn-odustani').click(function(){
     $('#myModal').toggle();
